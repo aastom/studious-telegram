@@ -30,7 +30,7 @@ jobs:
             - run:
                   name: Run Playbook and Configure server
                   command: |
-                      ansible-playbook -i host playbook.yml
+                      ansible-playbook -i hosts playbook.yml
 workflows:
     my-workflow:
         jobs:
