@@ -15,7 +15,24 @@ jobs:
                       --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" \
                       --region us-east-1
 
+    configure_infrastructure:
+        docker:
+            - image: python:3.7-alpine3.11
+        steps:
+            - checkout
+            - add_ssh_keys:
+                  fingerprints:
+                      ["80:23:b1:d4:f6:2b:23:68:4a:4c:c6:81:d3:94:4b:9c"]
+            - run:
+                  name: Install Ansible
+                  command: |
+                      apk add --update ansible
+            - run:
+                  name: Run Playbook and Configure server
+                  command: |
+                      ansible-playbook -i host playbook.yml
 workflows:
     my-workflow:
         jobs:
-            - create-infrastructure
+            # - create-infrastructure
+            - configure_infrastructure
