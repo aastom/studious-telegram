@@ -14,6 +14,7 @@ jobs:
                         --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
                         --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" \
                         --region us-east-2
+            - run: aws cloudformation describe-stack-events --stack-name myStack-fa8da
 
 workflows:
     my-workflow:
